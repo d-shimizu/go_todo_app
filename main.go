@@ -8,27 +8,27 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/d-shimizu/go_todo_app_hands-on/config"
 	"golang.org/x/sync/errgroup"
 )
 
 func main() {
-	if len(os.Args) != 2 {
-		log.Printf("need port number\n")
-		os.Exit(1)
-	}
-	p := os.Args[1]
-	l, err := net.Listen("tcp", ":"+p)
-	if err != nil {
-		log.Fatalf("failed to listen port: %s%+v", p, err)
-	}
-
-	if err := run(context.Background(), l); err != nil {
+	if err := run(context.Background()); err != nil {
 		log.Printf("failed to terminate server: %+v", err)
 		os.Exit(1)
 	}
 }
 
-func run(ctx context.Context, l net.Listener) error {
+func run(ctx context.Context) error {
+	cfg, err := config.New()
+	if err != nil {
+		return err
+	}
+	l, err := net.Listen("tcp", fmt.Sprintf(":%d", cfg.Port))
+	if err != nil {
+		log.Fatalf("failed to listen port %d: %v", cfg.Port, err)
+	}
+
 	s := &http.Server{
 		// 引数で受け取ったnet.Listenerを利用するので、
 		// Addr フィールドは指定しない
