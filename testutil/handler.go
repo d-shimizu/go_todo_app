@@ -18,7 +18,7 @@ func AssertJSON(t *testing.T, want, got []byte) {
 		t.Fatalf("cannot unmarshal want: %q: %v", want, err)
 	}
 	if err := json.Unmarshal(got, &jq); err != nil {
-		t.Fatalf("cannnot unmarshal got: %q: %v", got, err)
+		t.Fatalf("cannot unmarshal got: %q: %v", got, err)
 	}
 	if diff := cmp.Diff(jq, jw); diff != "" {
 		t.Errorf("(-got +want)\n%s", diff)
@@ -48,7 +48,7 @@ func LoadFile(t *testing.T, path string) []byte {
 
 	bt, err := os.ReadFile(path)
 	if err != nil {
-		t.Fatalf("cannnot read from %q: %v", path, err)
+		t.Fatalf("cannot read from %q: %v", path, err)
 	}
 	return bt
 }
