@@ -28,7 +28,7 @@ func (r *Repository) AddTask(
 	sql := `INSERT INTO task
 		(title, status, created, modified)
 		VALUES (?, ?, ?, ?)`
-	results, err := db.ExecContext(
+	result, err := db.ExecContext(
 		ctx, sql, t.Title, t.Status,
 		t.Created, t.Modified,
 	)
