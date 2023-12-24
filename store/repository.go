@@ -6,16 +6,17 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/d-shimizu/go_todo_app_hands-on/clock"
 	"github.com/d-shimizu/go_todo_app_hands-on/config"
 	"github.com/jmoiron/sqlx"
 )
 
 type Beginner interface {
-	BeginTx(ctx context.Context, opts *sql.TxOptions) (*sqlx.Tx, error)
+	BeginTx(ctx context.Context, opts *sql.TxOptions) (*sql.Tx, error)
 }
 
 type Preparer interface {
-	Preparex(ctx context.Context, query string) (*sqlx.Stmt, error)
+	PreparexContext(ctx context.Context, query string) (*sqlx.Stmt, error)
 }
 
 type Execer interface {
