@@ -3,7 +3,7 @@
 
 DOCKER_TAG := latest
 build: ## build docker imagge to deploy
-	docker build -t dshimizu/gotodo:$(DOCKER_TAG) . \
+	docker build -t dshimizu/gotodo:$(DOCKER_TAG) \
 		--target deploy ./
 
 build-local: ## build docker image to local deployment
